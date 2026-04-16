@@ -3,6 +3,7 @@ package dev.hisamoto.trmarket.controller;
 import dev.hisamoto.trmarket.model.Skin;
 import dev.hisamoto.trmarket.repository.SkinRepository;
 import dev.hisamoto.trmarket.repository.SkinSpecification;
+import dev.hisamoto.trmarket.service.EmailService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,11 @@ import java.util.List;
 public class SkinController {
 
     private final SkinRepository skinRepository;
+    private final EmailService emailService;
 
-    public SkinController(SkinRepository skinRepository) {
+    public SkinController(SkinRepository skinRepository, EmailService emailService) {
         this.skinRepository = skinRepository;
+        this.emailService = emailService;
     }
 
     // ── Público ─────────────────────────────────────
@@ -99,7 +102,9 @@ public class SkinController {
 
     @PostMapping("/admin/skins")
     public ResponseEntity<Skin> cadastrar(@Valid @RequestBody Skin skin) {
-        return ResponseEntity.ok(skinRepository.save(skin));
+        Skin salva = skinRepository.save(skin);
+        emailService.enviarNovaSkin(salva);
+        return ResponseEntity.ok(salva);
     }
 
     @PutMapping("/admin/skins/{id}")
