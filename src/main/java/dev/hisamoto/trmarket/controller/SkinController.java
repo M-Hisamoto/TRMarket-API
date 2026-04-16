@@ -2,9 +2,11 @@ package dev.hisamoto.trmarket.controller;
 
 import dev.hisamoto.trmarket.model.Skin;
 import dev.hisamoto.trmarket.repository.SkinRepository;
+import dev.hisamoto.trmarket.repository.SkinSpecification;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
@@ -24,6 +26,28 @@ public class SkinController {
     public ResponseEntity<List<Skin>> listarDisponiveis() {
         return ResponseEntity.ok(
                 skinRepository.findByStatus(Skin.Status.DISPONIVEL)
+        );
+    }
+
+    @GetMapping("/skins/filtrar")
+    public ResponseEntity<List<Skin>> filtrar(
+            @RequestParam(required = false) String arma,
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) Skin.Categoria categoria,
+            @RequestParam(required = false) Skin.Time time,
+            @RequestParam(required = false) Skin.Raridade raridade,
+            @RequestParam(required = false) Skin.Desgaste desgaste,
+            @RequestParam(required = false) Boolean statTrak,
+            @RequestParam(required = false) Boolean souvenir,
+            @RequestParam(required = false) Skin.Status status) {
+
+        return ResponseEntity.ok(
+                skinRepository.findAll(
+                        SkinSpecification.filtrar(
+                                arma, nome, categoria, time,
+                                raridade, desgaste, statTrak, souvenir, status
+                        )
+                )
         );
     }
 
