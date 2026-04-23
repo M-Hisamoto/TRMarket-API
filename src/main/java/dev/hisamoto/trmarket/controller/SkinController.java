@@ -107,6 +107,11 @@ public class SkinController {
         return ResponseEntity.ok(salva);
     }
 
+    @GetMapping("/admin/skins")
+    public ResponseEntity<List<Skin>> listarTodas() {
+        return ResponseEntity.ok(skinRepository.findAll());
+    }
+
     @PutMapping("/admin/skins/{id}")
     public ResponseEntity<Skin> atualizar(
             @PathVariable Long id,

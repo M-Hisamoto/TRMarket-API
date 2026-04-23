@@ -6,7 +6,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "user_favoritos",
         uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "skin_id"}))
-public class UserFavorite {
+public class UserFavorite
+{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
