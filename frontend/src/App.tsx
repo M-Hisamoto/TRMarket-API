@@ -8,6 +8,9 @@ import AdminSkinForm from './pages/admin/AdminSkinForm'
 import PublicLayout from './layouts/PublicLayout.tsx'
 import CatalogPage from './pages/public/CatalogPage.tsx'
 import SkinDetailPage from './pages/public/SkinDetailPage.tsx'
+import RegisterPage from './pages/RegisterPage.tsx'
+import FavoritesPage from './pages/user/FavoritesPage.tsx'
+import ProfilePage from './pages/user/ProfilePage.tsx'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { token, isAdmin } = useAuth()
@@ -21,9 +24,13 @@ export default function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
 
+      <Route path="/register" element={<RegisterPage />} />
+
       <Route path="/" element={<PublicLayout />}>
         <Route index element={<CatalogPage />} />
         <Route path="skins/:id" element={<SkinDetailPage />} />
+        <Route path="favoritos" element={<FavoritesPage />} />
+        <Route path="perfil" element={<ProfilePage />} />
       </Route>
 
       <Route

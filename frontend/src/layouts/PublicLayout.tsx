@@ -28,24 +28,33 @@ export default function PublicLayout() {
               to="/"
               end
               className={({ isActive }) =>
-                `text-sm uppercase tracking-widest font-medium transition-colors ${
-                  isActive ? 'text-orange-500' : 'text-zinc-400 hover:text-white'
+                `text-sm uppercase tracking-widest font-medium transition-colors ${isActive ? 'text-orange-500' : 'text-zinc-400 hover:text-white'
                 }`
               }
             >
               Vitrine
             </NavLink>
             {user && (
-              <NavLink
-                to="/favoritos"
-                className={({ isActive }) =>
-                  `text-sm uppercase tracking-widest font-medium transition-colors ${
-                    isActive ? 'text-orange-500' : 'text-zinc-400 hover:text-white'
-                  }`
-                }
-              >
-                Favoritos
-              </NavLink>
+              <>
+                <NavLink
+                  to="/favoritos"
+                  className={({ isActive }) =>
+                    `text-sm uppercase tracking-widest font-medium transition-colors ${isActive ? 'text-orange-500' : 'text-zinc-400 hover:text-white'
+                    }`
+                  }
+                >
+                  Favoritos
+                </NavLink>
+                <NavLink
+                  to="/perfil"
+                  className={({ isActive }) =>
+                    `text-sm uppercase tracking-widest font-medium transition-colors ${isActive ? 'text-orange-500' : 'text-zinc-400 hover:text-white'
+                    }`
+                  }
+                >
+                  Perfil
+                </NavLink>
+              </>
             )}
             {isAdmin && (
               <NavLink
@@ -65,20 +74,29 @@ export default function PublicLayout() {
                 <button
                   onClick={handleLogout}
                   className="text-sm uppercase tracking-widest text-zinc-400 
-                             hover:text-orange-500 transition-colors"
+                 hover:text-orange-500 transition-colors"
                 >
                   Sair
                 </button>
               </>
             ) : (
-              <button
-                onClick={() => navigate('/login')}
-                className="text-sm uppercase tracking-widest bg-orange-500 
-                           hover:bg-orange-600 text-black font-bold px-4 py-2 
-                           rounded-lg transition-colors"
-              >
-                Entrar
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => navigate('/register')}
+                  className="text-sm uppercase tracking-widest text-zinc-400
+                 hover:text-white transition-colors font-medium"
+                >
+                  Cadastrar
+                </button>
+                <button
+                  onClick={() => navigate('/login')}
+                  className="text-sm uppercase tracking-widest bg-orange-500 
+                 hover:bg-orange-600 text-black font-bold px-4 py-2 
+                 rounded-lg transition-colors"
+                >
+                  Entrar
+                </button>
+              </div>
             )}
           </div>
         </div>

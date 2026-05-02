@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import api from '../../lib/api'
 import type { Skin } from '../../types'
+import FavoriteButton from '../../components/FavoriteButton.tsx'
 
 const raridadeCor: Record<string, string> = {
   CONSUMER: 'bg-zinc-500',
@@ -136,13 +137,22 @@ export default function SkinDetailPage() {
             </p>
           )}
 
-          
-            <a href={whatsappUrl} 
+          <div className="flex gap-3">
+            <a 
+            
+            href={whatsappUrl} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="w-full flex items-center justify-center gap-3 bg-green-600 hover:bg-green-500 text-white font-bold py-4 rounded-xl uppercase tracking-widest text-sm transition-colors">
+            className="flex-1 flex items-center justify-center gap-3 bg-green-600
+               hover:bg-green-500 text-white font-bold py-4 rounded-xl
+               uppercase tracking-widest text-sm transition-colors">
             Tenho interesse — WhatsApp
-        </a>
+
+            </a>
+
+            <FavoriteButton skinId={skin.id} size="lg" />
+
+          </div>
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import api from '../../lib/api'
 import type { Skin } from '../../types'
+import FavoriteButton from '../../components/FavoriteButton.tsx'
 
 const raridades = ['CONSUMER', 'INDUSTRIAL', 'MIL_SPEC', 'RESTRICTED', 'CLASSIFIED', 'COVERT', 'CONTRABAND']
 const desgastes = ['FACTORY_NEW', 'MINIMAL_WEAR', 'FIELD_TESTED', 'WELL_WORN', 'BATTLE_SCARRED']
@@ -198,9 +199,12 @@ export default function CatalogPage() {
                       currency: 'BRL',
                     })}
                   </p>
-                  <span className="text-xs uppercase tracking-widest text-zinc-600">
-                    {skin.time}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs uppercase tracking-widest text-zinc-600">
+                      {skin.time}
+                    </span>
+                    <FavoriteButton skinId={skin.id} />
+                  </div>
                 </div>
               </div>
             </div>
