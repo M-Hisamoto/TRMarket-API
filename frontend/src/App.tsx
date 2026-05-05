@@ -11,6 +11,7 @@ import SkinDetailPage from './pages/public/SkinDetailPage.tsx'
 import RegisterPage from './pages/RegisterPage.tsx'
 import FavoritesPage from './pages/user/FavoritesPage.tsx'
 import ProfilePage from './pages/user/ProfilePage.tsx'
+import NotFoundPage from './pages/NotFoundPage.tsx'
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { token, isAdmin } = useAuth()
@@ -47,7 +48,7 @@ export default function App() {
         <Route path="skins/editar/:id" element={<AdminSkinForm />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
 }
