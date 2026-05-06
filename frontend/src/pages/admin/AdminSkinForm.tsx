@@ -84,6 +84,21 @@ export default function AdminSkinForm() {
   const inputClass = `w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-2.5
                       text-white focus:outline-none focus:border-orange-500 transition-colors`
 
+  const formatarPrecoDisplay = (centavos: number): string => {
+    return (centavos / 100).toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL',
+    })
+  }
+
+  const handlePrecoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const apenasNumeros = e.target.value.replace(/\D/g, '')
+    const centavos = parseInt(apenasNumeros || '0', 10)
+    setForm({ ...form, preco: centavos / 100 })
+  }
+
+  const precoEmCentavos = Math.round(form.preco * 100)
+
   return (
     <div>
       <div className="flex items-center gap-4 mb-8">
@@ -150,11 +165,23 @@ export default function AdminSkinForm() {
             )}
           </div>
 
-          {field('Preço (R$)',
-            <input className={inputClass} type="number" step="0.01" min="0"
-              value={form.preco}
-              onChange={(e) => setForm({ ...form, preco: Number(e.target.value) })}
-              required />
+          {field('Preço',
+            <div className="relative">
+              <input
+                className={inputClass}
+                type="text"
+                inputMode="numeric"
+                value={precoEmCentavos === 0 ? '' : precoEmCentavos.toString()}
+                onChange={handlePrecoChange}
+                placeholder="Ex: 280000 = R$ 2.800,00"
+                required
+              />
+              {precoEmCentavos > 0 && (
+                <div className="mt-2 text-orange-500 font-bold text-sm">
+                  {formatarPrecoDisplay(precoEmCentavos)}
+                </div>
+              )}
+            </div>
           )}
 
           {field('URL da imagem',
