@@ -7,8 +7,6 @@ import dev.hisamoto.trmarket.service.EmailService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.data.jpa.domain.Specification;
-
 import java.util.List;
 
 @RestController
