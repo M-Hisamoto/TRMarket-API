@@ -6,6 +6,6 @@ class TrmarketApplicationTests {
 
 	@Test
 	void contextLoads() {
-		// testes serão adicionados depois
+
 	}
 }
